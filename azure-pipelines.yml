@@ -18,12 +18,12 @@ stages:
     steps: 
     - bash: echo first job and build
     - bash: echo $(pipelinelevevariable)
-  - job: build-secondjob
+  - job: buildsecondjob
     steps:
-      - bash: echo build-secondjob
-  - job: build-thirdjob
+      - bash: echo build secondjob
+  - job: buildthirdjob
     steps:
-      - bash: echo build-thirdjob
+      - bash: echo build thirdjob
 
 - stage: DevDeploy
   variables:
