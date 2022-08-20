@@ -17,9 +17,9 @@ jobs:
   - bash: echo build firstjob
   - bash: echo $(PipelineLevelVariable)
   - bash: echo $(Build.BuildNunber)
-  - bash: echo $(Build.Builid)
+  - bash: echo $(Build.Buildid)
   - bash: echo $(Build.SourceBranchName)
-  - bash: echo $(Build.SourceDirectory)
+  - bash: echo $(Build.SourcesDirectory)
   - bash: ls -al $(System.DefaultWorkingDirectory)
   - bash: echo $(Build.ArtiFactStagingDirectory)
 #   - script: echo job1 hi Hello, world change!
