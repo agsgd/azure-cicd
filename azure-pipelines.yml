@@ -9,10 +9,9 @@ trigger:
 strategy:
   matrix:
     linux:
-       operatingSystem: 'ubuntu-latest'
-       operatingSystem: 'centos-latest'
-    mac:
-         
+       operatingSystem: ['ubuntu-latest','centos-latest']
+
+    mac:  
       operatingSystem: 'macos-latest'
 
 
