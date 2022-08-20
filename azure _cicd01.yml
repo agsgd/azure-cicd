@@ -15,6 +15,14 @@ jobs:
 
   steps:
   - bash: echo build firstjob
+  - bash: java -version
+  - bash: node --version
+  - bash: git --version
+  - bash: python --version
+  - bash: mvn -version
+  
+
+
   - bash: echo $(Build.ArtifactStagingDirectory)
   - bash: echo $(PipelineLevelVariable)
   - bash: echo $(Build.Repository.Name)
@@ -26,8 +34,20 @@ jobs:
   - bash: echo $(Build.Buildid)
   - bash: echo $(Build.SourceBranchName)
   - bash: echo $(Build.SourcesDirectory)
-  - bash: ls -al $(System.DefaultWorkingDirectory)
+  
   - bash: echo $(Build.ArtiFactStagingDirectory)
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.ArtifactStagingDirectory)'
+      Contents: |
+        **/*.yaml
+        **/*.tf
+      TargetFolder: '$(System.DefaultWorkingDirectory)'
+  - bash: ls -R $(System.DefaultWorkingDirectory)
+
+  
+  
+
 #   - script: echo job1 hi Hello, world change!
     
 #     displayName: 'Run a one-line script'
