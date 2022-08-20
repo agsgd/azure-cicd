@@ -10,19 +10,31 @@ pool:
   vmImage: ubuntu-latest
 
 #pipelines > steps > jobs
-jobs:
-- job: job1
 
-  steps:
-  - script: echo job1 hi Hello, world change!
-    displayName: 'Run a one-line script'
-
-  - script: | 
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
-      echo more information
-    displayName: 'Run a multi-line script'
-- job: job2
-  steps:
-    - script: echo job2!
-      displayName: 'Rum online-script'
+stages:
+- stage: Build
+  jobs:
+  - job:  first job
+    steps: 
+    - bash: echo first job and build
+- stage: DevDeploy
+  jobs:
+    - job: second job
+      steps:
+      - bash: echo second job and dev 
+- stage: QADpeploy
+  jobs:
+    - job: Third job
+      steps: 
+      - bash: echo third job and QA
+- stage: ProdDeploy
+  jobs:
+    - job: fourth job
+      steps: 
+      - bash: fourth job and prod
+- stage: Gabbar
+  jobs:
+    - job: fifth job
+      steps: 
+      - bash: echo fifth job and gabbar
+  
