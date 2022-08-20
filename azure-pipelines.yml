@@ -17,7 +17,18 @@ stages:
   - job: firstjob
     steps: 
     - bash: echo first job and build
+    - bash: echo $(pipelinelevevariable)
+  - job: build-secondjob
+    steps:
+      - bash: echo build-secondjob
+  - job: build-thirdjob
+    steps:
+      - bash: echo build-thirdjob
+
 - stage: DevDeploy
+  variables:
+    environment: Dev
+
   dependsOn: Build
 
   jobs:
@@ -25,13 +36,19 @@ stages:
       steps:
       - bash: echo 'second job and dev' 
 - stage: QADeploy
+  variables:
+      environment: QA
   dependsOn: Build
 
   jobs:
     - job: Thirdjob
       steps: 
       - bash: echo third job and QA
+
 - stage: ProdDeploy
+
+  variables:
+    environment: Prod
   dependsOn: 
   - QADeploy
   - DevDeploy
@@ -39,7 +56,12 @@ stages:
     - job: fourthjob
       steps: 
       - bash: echo fourth job and prod
+
 - stage: Gabbar
+  
+  variables:
+      environment: Dev
+
   dependsOn: 
   - ProdDeploy
   jobs:
