@@ -45,7 +45,11 @@ jobs:
       TargetFolder: '$(System.DefaultWorkingDirectory)'
   - bash: ls -R $(System.DefaultWorkingDirectory)
 
-  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
   
 
 #   - script: echo job1 hi Hello, world change!
