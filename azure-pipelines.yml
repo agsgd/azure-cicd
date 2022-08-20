@@ -18,13 +18,14 @@ stages:
     steps: 
     - bash: echo first job and build
 - stage: DevDeploy
-  dependsOn: QADeploy
+  dependsOn: Build
 
   jobs:
     - job: secondjob
       steps:
       - bash: echo 'second job and dev' 
 - stage: QADeploy
+  dependsOn: Build
 
   jobs:
     - job: Thirdjob
@@ -32,7 +33,6 @@ stages:
       - bash: echo third job and QA
 - stage: ProdDeploy
   dependsOn: 
-  - Build
   - QADeploy
   jobs:
     - job: fourthjob
@@ -40,8 +40,7 @@ stages:
       - bash: echo fourth job and prod
 - stage: Gabbar
   dependsOn: 
-  - DevDeploy
-  - QADeploy
+  - ProdDeploy
   jobs:
     - job: fifthjob
       steps: 
