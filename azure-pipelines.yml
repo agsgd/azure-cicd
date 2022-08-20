@@ -6,71 +6,78 @@
 trigger:
 - master
 
+strategy:
+  matrix:
+    linux:
+       operatingSystem: 'ubuntu-latest'
+       operatingSystem: 'centos-latest'
+
+
 pool:
-  vmImage: ubuntu-latest
+  vmImage: $(operatingSystem)
 
-#pipelines > steps > jobs
+# #pipelines > steps > jobs
 
-stages:
-- stage: Build
-  jobs:
-  - job: firstjob
-    steps: 
-    - bash: echo first job and build
-    - bash: echo $(pipelinelevevariable)
-  - job: buildsecondjob
-    steps:
-      - bash: echo build secondjob
-  - job: buildthirdjob
-    steps:
-      - bash: echo build thirdjob
+# stages:
+# - stage: Build
+#   jobs:
+#   - job: firstjob
+#     steps: 
+#     - bash: echo first job and build
+#     - bash: echo $(pipelinelevevariable)
+#   - job: buildsecondjob
+#     steps:
+#       - bash: echo build secondjob
+#   - job: buildthirdjob
+#     steps:
+#       - bash: echo build thirdjob
 
-- stage: DevDeploy
-  variables:
-    environment: Dev
+# - stage: DevDeploy
+#   variables:
+#     environment: Dev
 
-  dependsOn: Build
+#   dependsOn: Build
 
-  jobs:
-    - job: secondjob
-      steps:
-      - bash: echo 'second job and dev' 
-- stage: QADeploy
-  variables:
-      environment: QA
-  dependsOn: Build
+#   jobs:
+#     - job: secondjob
+#       steps:
+#       - bash: echo 'second job and dev' 
+# - stage: QADeploy
+#   variables:
+#       environment: QA
+#   dependsOn: Build
 
-  jobs:
-    - job: Thirdjob
-      steps: 
-      - bash: echo third job and QA
+#   jobs:
+#     - job: Thirdjob
+#       steps: 
+#       - bash: echo third job and QA
 
-- stage: ProdDeploy
+# - stage: ProdDeploy
 
-  variables:
-    environment: Prod
-  dependsOn: 
-  - QADeploy
-  - DevDeploy
-  jobs:
-    - job: fourthjob
-      steps: 
-      - bash: echo fourth job and prod
+#   variables:
+#     environment: Prod
+#   dependsOn: 
+#   - QADeploy
+#   - DevDeploy
+#   jobs:
+#     - job: fourthjob
+#       steps: 
+#       - bash: echo fourth job and prod
 
-- stage: Gabbar
+# - stage: Gabbar
   
-  variables:
-      environment: Dev
+#   variables:
+#       environment: Dev
 
-  dependsOn: 
-  - ProdDeploy
-  jobs:
-    - job: fifthjob
-      steps: 
-      - bash: echo fifth job and gabbar
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
+#   dependsOn: 
+#   - ProdDeploy
+#   jobs:
+#     - job: fifthjob
+#       steps: 
+#       - bash: echo fifth job and gabbar
+#       - task: PublishBuildArtifacts@1
+#         inputs:
+#           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#           ArtifactName: 'drop'
+#           publishLocation: 'Container'
     
