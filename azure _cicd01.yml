@@ -15,8 +15,14 @@ jobs:
 
   steps:
   - bash: echo build firstjob
+  - bash: echo $(Build.ArtifactStagingDirectory)
   - bash: echo $(PipelineLevelVariable)
-  - bash: echo $(Build.BuildNunber)
+  - bash: echo $(Build.Repository.Name)
+  - bash: echo $(Build.Repository.Provider)
+  - bash: echo $(Build.Repository.ID)
+  - bash: echo $(Build.ContainerId)
+  - bash: echo $(System.JobName)
+  - bash: echo $(Build.BuildNumber)
   - bash: echo $(Build.Buildid)
   - bash: echo $(Build.SourceBranchName)
   - bash: echo $(Build.SourcesDirectory)
